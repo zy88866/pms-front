@@ -3389,7 +3389,7 @@ html-minifier@^3.2.3:
 
 html-webpack-plugin@^2.30.1:
   version "2.30.1"
-  resolved "http://registry.npm.taobao.org/html-webpack-plugin/download/html-webpack-plugin-2.30.1.tgz#7f9c421b7ea91ec460f56527d78df484ee7537d5"
+  resolved "http://registry.npm.taobao.org/html-webpack-plugin/download/html-webpack-plugin-2.30.1.tgz?cache=0&other_urls=http%3A%2F%2Fregistry.npm.taobao.org%2Fhtml-webpack-plugin%2Fdownload%2Fhtml-webpack-plugin-2.30.1.tgz#7f9c421b7ea91ec460f56527d78df484ee7537d5"
   integrity sha1-f5xCG36pHsRg9WUn1430hO51N9U=
   dependencies:
     bluebird "^3.4.7"
@@ -4715,9 +4715,9 @@ object-hash@^1.1.4:
   integrity sha1-/eRSCYqVHLFF8Dm7fUVUSd3BJt8=
 
 object-keys@^1.0.12:
-  version "1.1.0"
-  resolved "http://registry.npm.taobao.org/object-keys/download/object-keys-1.1.0.tgz#11bd22348dd2e096a045ab06f6c85bcc340fa032"
-  integrity sha1-Eb0iNI3S4JagRasG9shbzDQPoDI=
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/object-keys/download/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
+  integrity sha1-HEfyct8nfzsdrwYWd9nILiMixg4=
 
 object-visit@^1.0.0:
   version "1.0.1"
@@ -7040,7 +7040,7 @@ webpack-dev-middleware@1.12.2:
 
 webpack-dev-server@^2.9.1:
   version "2.11.5"
-  resolved "http://registry.npm.taobao.org/webpack-dev-server/download/webpack-dev-server-2.11.5.tgz#416fbdea0e04eebe44a626e791d5a2eb37fe8c48"
+  resolved "http://registry.npm.taobao.org/webpack-dev-server/download/webpack-dev-server-2.11.5.tgz?cache=0&other_urls=http%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack-dev-server%2Fdownload%2Fwebpack-dev-server-2.11.5.tgz#416fbdea0e04eebe44a626e791d5a2eb37fe8c48"
   integrity sha1-QW+96g4E7r5EpibnkdWi6zf+jEg=
   dependencies:
     ansi-html "0.0.7"
@@ -7088,7 +7088,7 @@ webpack-sources@^1.0.1, webpack-sources@^1.1.0:
 
 webpack@^3.6.0:
   version "3.12.0"
-  resolved "http://registry.npm.taobao.org/webpack/download/webpack-3.12.0.tgz#3f9e34360370602fcf639e97939db486f4ec0d74"
+  resolved "http://registry.npm.taobao.org/webpack/download/webpack-3.12.0.tgz?cache=0&other_urls=http%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack%2Fdownload%2Fwebpack-3.12.0.tgz#3f9e34360370602fcf639e97939db486f4ec0d74"
   integrity sha1-P540NgNwYC/PY56Xk520hvTsDXQ=
   dependencies:
     acorn "^5.0.0"

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/pages/login/index.vue'
 
 Vue.use(Router)
 
@@ -10,8 +9,13 @@ const router =new Router({
   {
       path:'/',
       name: 'Layout',
-      component: resolve => require(['@/pages/layout/Layout.vue'], resolve),
+      component: resolve => require(['@/pages/layout/Layout.vue'], resolve)
     },
+  {
+      path: '/login',
+      name: 'Login',
+      component: resolve => require(['@/pages/login'],resolve)
+    }
   //   {
   //     path: '*', //当路由不匹配时跳转
   //     redirect: '/404'
@@ -21,28 +25,26 @@ const router =new Router({
 
    // 在渲染该组件的对应路由被 confirm 前调用
 router.beforeEach((to,from,next) =>{
-    console.log(to);
-    console.log(from);
-    if(to.path!=="/home1"){
-        next({
-          path: '/home1',
-          query: {redirect: to.fullpath}
-        })
-    }else{
+  if(sessionStorage.getItem("token")!==null || to.path==="/login"){
       next();
-    }
+  }else{
+    next({
+      path: '/login',
+      query: {redirect: to.fullpath}
+    })
+  }
 })
 
-const routers = [ {
-  path: '/home1',
-  name: 'Login',
-  component: Login,
-  meta:{
-      title: '登陆',
-      icon: 'logo'
-  }
-}]
-router.addRoutes(routers)
+// const routers = [ {
+//   path: '/home1',
+//   name: 'Login',
+//   component: Login,
+//   meta:{
+//       title: '登陆',
+//       icon: 'logo'
+//   }
+// }]
+// router.addRoutes(routers)
 export default router;
 
 
