@@ -19,11 +19,12 @@ const router =new Router({
       path: '/login',
       name: '登录',
       component: resolve => require(['@/views/Login'],resolve)
-    }
-  //   {
-  //     path: '*', //当路由不匹配时跳转
-  //     redirect: '/404'
-  // }
+    },
+    {
+      path: '/404', 
+      name: '错误页面',
+      component: resolve => require(['@/views/Error/404.vue'],resolve)
+  }
   ]
 })
 
@@ -54,13 +55,15 @@ function addDynamicMenuAndRoutes (next, to){
       next();
   }else{
       loadCurrMenu().then(res => {
-        const asyncRouter = filterAsyncRouter(res.data)
-        store.dispatch('GenerateRoutes', asyncRouter).then(() => { // 存储路由
-          store.commit('setLoadMenus', true);
-          // 动态添加可访问路由表
-          router.addRoutes(asyncRouter);
-          next({ ...to, replace: true });// hack方法 确保addRoutes已完成
-        })
+        if(res.data!==undefined){
+          const asyncRouter = filterAsyncRouter(res.data)
+          store.dispatch('GenerateRoutes', asyncRouter).then(() => { // 存储路由
+            store.commit('setLoadMenus', true);
+            // 动态添加可访问路由表
+            router.addRoutes(asyncRouter);
+            next({ ...to, replace: true });// hack方法 确保addRoutes已完成
+          })
+        }
     })
     }
 }
