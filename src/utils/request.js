@@ -1,7 +1,7 @@
 import axios from 'axios'
-import {getRefreshToken,getToken,setToken,removeUserInfo} from "~utils/sessionStorage"
+import {getToken,removeUserInfo} from "~utils/sessionStorage"
 import router from "@/router/"
-import { refreshToken } from "@/api/auth"
+//import { refreshToken } from "@/api/auth"
 import { Notification, Message } from 'element-ui'
 
 //创建实例时设置配置的默认值
@@ -38,8 +38,8 @@ service.interceptors.response.use(function (response) {
                   "accessToken": getToken(),
                   "refreshToken":getRefreshToken()
                 }
-                refreshToken(jwtToken).then((response)=>{
-                      setToken(response.data.data);      
+                refreshToken(jwtToken).then((res)=>{
+                      setToken(res.data);      
                 })
             }else{
                 removeUserInfo();
