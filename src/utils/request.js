@@ -1,8 +1,8 @@
 import axios from 'axios'
-import {getToken,removeUserInfo} from "~utils/sessionStorage"
+import {getRefreshToken,getToken,setToken,removeUserInfo} from "~utils/sessionStorage"
 import router from "@/router/"
+import { refreshToken } from "@/api/auth"
 import { Notification, Message } from 'element-ui'
-
 
 //创建实例时设置配置的默认值
 const service  = axios.create({
@@ -11,16 +11,16 @@ const service  = axios.create({
 });
 
 // 添加请求拦截器
-service.interceptors.request.use(function (config) {
+service.interceptors.request.use(function (request) {
     // 在发送请求之前做些什么
-     if(config.url!=="/login"){
+     if(request.url!=="/login"){
          const token = getToken();
         if(token!==null){
-          config.headers['Authorization'] = 'Bearer ' + token;
+          request.headers['Authorization'] = 'Bearer ' + token;
         }
-        config.headers['Content-Type'] = 'application/json'
+        request.headers['Content-Type'] = 'application/json'
      }
-    return config;
+    return request;
   }, function (error) {
     console.log(error);
     return Promise.reject(error);
@@ -30,22 +30,34 @@ service.interceptors.request.use(function (config) {
 // 添加响应拦截器
 service.interceptors.response.use(function (response) {
     const res = response.data;
+    console.log(response);
     if(res.code!==200){
         if( res.code===401){
-          removeUserInfo();
-          router.push("/login");
+            if(response.config.url.replace(response.config.baseURL,'')!=="/auth/token"){
+                const jwtToken={
+                  "accessToken": getToken(),
+                  "refreshToken":getRefreshToken()
+                }
+                refreshToken(jwtToken).then((response)=>{
+                      setToken(response.data.data);      
+                })
+            }else{
+                removeUserInfo();
+                router.push("/login");
+            }
+            return res;
         }else {
           Message({
             message: res.message,
             type: 'error',
             duration: 2000
         })
-        return Promise.reject(error);
+        return Promise.reject(res);
     }
   }
      return res;
   }, function (error) {
-      console.log(error)
+    console.log( Promise.reject(error));
       Message({
           message:"服务器可能出了点问题",
           type:'error'

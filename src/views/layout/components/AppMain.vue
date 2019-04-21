@@ -1,5 +1,5 @@
 <template>
-   <div class="main-content">
+   <div class="main-content" :class="$store.state.app.collapse?'position-collapse-left':'position-left'">
          <keep-alive>
                <transition name="fade" mode="out-in">
                      <router-view></router-view>
@@ -20,11 +20,17 @@ export default {
 
 <style lang="less" scoped>
    .main-content{
-    position: absolute;
-    top: 50px;
-    left: 210px;
-    right: 0px;
-    bottom: 0px;
+      position: absolute;
+      top: 60px;
+      right: 0px;
+      bottom: 0px;
+      padding: 0 5px 5px;
+   }
+   .position-left {
+      left: 205px;
+   }
+   .position-collapse-left {
+       left: 65px;
    }
 </style>
 

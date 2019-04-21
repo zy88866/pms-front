@@ -38,12 +38,8 @@ router.beforeEach((to,from,next) =>{
       }
   }else{
     if(username){
-      if(store.getters.loadMenus=== false){
-          //动态去后台加载路由
+         //动态去后台加载路由
           addDynamicMenuAndRoutes(next, to);
-      }else{
-        next();
-      }
     }else{
         next({
           path: '/login',
@@ -55,18 +51,18 @@ router.beforeEach((to,from,next) =>{
 
 function addDynamicMenuAndRoutes (next, to){
   if(store.state.app.loadMenus){
-      console.log('动态菜单和路由已经存在.')
-      return
-  }
-  loadCurrMenu().then(res => {
-    const asyncRouter = filterAsyncRouter(res.data)
-    store.dispatch('GenerateRoutes', asyncRouter).then(() => { // 存储路由
-      store.commit('SET_LOAD_MENUS', true);
-      // 动态添加可访问路由表
-      router.addRoutes(asyncRouter);
-      next({ ...to, replace: true });// hack方法 确保addRoutes已完成
+      next();
+  }else{
+      loadCurrMenu().then(res => {
+        const asyncRouter = filterAsyncRouter(res.data)
+        store.dispatch('GenerateRoutes', asyncRouter).then(() => { // 存储路由
+          store.commit('setLoadMenus', true);
+          // 动态添加可访问路由表
+          router.addRoutes(asyncRouter);
+          next({ ...to, replace: true });// hack方法 确保addRoutes已完成
+        })
     })
- })
+    }
 }
 
 function filterAsyncRouter(routers){

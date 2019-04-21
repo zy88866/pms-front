@@ -15,13 +15,19 @@ export  function setUserInfo(value){
  }
 
  export function removeUserInfo(){
-   sessionStorage.remove("userInfo")
+   sessionStorage.removeItem("userInfo");
  }
 
  export function getToken(){
-    return  getSessionStorage("token");
+    return  getSessionStorage("accessToken");
  }
+
+ export function getRefreshToken(){
+   return  getSessionStorage("refreshToken");
+}
  
  export  function setToken(value){
-       setSessionStorage("token",value);
+       setSessionStorage("accessToken",value.accessToken);
+       setSessionStorage("refreshToken",value.refreshToken);
   }
+

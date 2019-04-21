@@ -1,5 +1,7 @@
 <template>
-   <div class="navbar">
+   <div class="headbar" :class="$store.state.app.collapse?'position-collapse-left':'position-left'">
+      <hamburger :toggle-click="toggleSideBar" :is-active="$store.state.app.collapse" class="hamburger-container" />
+
       <el-dropdown class="avatar-container" >
           <span class="el-dropdown-link">
             <span>{{realName}}</span>
@@ -17,7 +19,8 @@
    </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex';
+import Hamburger from '@/components/Hamburger'
+import {logout} from '@/api/auth'
 import {getUserInfo} from '~utils/sessionStorage';
 export default {
    name: 'TitleBar',
@@ -27,28 +30,47 @@ export default {
          realName
        }
    },
-  //  computed: mapState({
-  //   username: (state) => state.username,
-  // }),
    methods:{
         userInfo(){
             this.$router.push({ path: '/' })
         },
         logOut(){
-        }
+              logout().then(()=>{
+                  sessionStorage.clear();
+                  this.$router.push("/login");
+              })
+        },
+        toggleSideBar() {
+          this.$store.commit("toggleSideBar");
+        },
    },
-  components: {}
+    components: {
+      Hamburger,
+   },
 }
 </script>
 
 <style lang="less" scoped>
-    .navbar{
-      height: 50px;
-      line-height: 50px;
+    .headbar{
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 1030;
+      height: 60px;
+      line-height: 60px;
+      border-color: rgba(180, 190, 190, 0.8);
+      border-left-width: 1px;
+      border-left-style: solid;
       box-shadow: 0 1px 3px 0 rgba(0,0,0,.12), 0 0 3px 0 rgba(0,0,0,.04);
+        .hamburger-container {
+          line-height: 60px;
+          height: 60px;
+          float: left;
+          padding: 0 10px;
+        }
     }
     .avatar-container{
-      height: 50px;
+      height: 60px;
       cursor:pointer;
       display: inline-block;
       position: absolute;
@@ -56,7 +78,12 @@ export default {
       .el-dropdown-link{
         font-size: 16px;
       }
-   
     }
+  .position-left {
+    left: 205px;
+  }
+  .position-collapse-left {
+    left: 65px;
+  }
 </style>
 

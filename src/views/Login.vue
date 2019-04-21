@@ -24,7 +24,8 @@
 
 <script>
 import {setToken,setUserInfo} from "~utils/sessionStorage"
-import {login,getUserInfo} from '@/api/user'
+import {login} from '@/api/auth'
+import {getUserInfo} from '@/api/user'
 export default {
    name: 'Login',
    data() {
