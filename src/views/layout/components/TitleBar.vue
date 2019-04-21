@@ -80,10 +80,10 @@ export default {
       }
     }
   .position-left {
-    left: 205px;
+    left: 204px;
   }
   .position-collapse-left {
-    left: 65px;
+    left: 64px;
   }
 </style>
 

@@ -55,6 +55,7 @@ export default {
             height: 60px;   
             line-height: 60px;
             background: #304156;
+            border-right: solid 1px #e6e6e6;
             cursor:pointer;
             img {
                 width:185px;
