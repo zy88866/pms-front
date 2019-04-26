@@ -13,3 +13,10 @@ import request from '../utils/request'
       method:'get'
     }) 
   }
+
+  export function getUserList(){
+    return request({
+        url: '/user/list',
+        method: 'get'
+    })
+  }

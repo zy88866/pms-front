@@ -1,4 +1,5 @@
 import request from '../utils/request'
+import {getToken,getRefreshToken} from "~utils/sessionStorage"
 import qs from 'qs'
 
 export function login(username, password) {
@@ -18,10 +19,23 @@ export function login(username, password) {
     })
   }
 
-  export function refreshToken(data) {
-    return request({
-      url: 'auth/token',
-      method: 'post',
-      data: data,
-    })
+  // export function refreshToken(data) {
+  //   return request({
+  //     url: 'auth/token',
+  //     method: 'post',
+  //     data: data,
+  //   })
+  // }
+
+export function refreshToken(){
+      return new Promise((resolve,reject)=>{
+              return request({
+                  url: 'auth/token',
+                  method: 'post',
+                  data: {
+                      "accessToken": getToken(),
+                      "refreshToken":getRefreshToken()
+                  },
+          })
+      })
   }

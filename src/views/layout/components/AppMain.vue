@@ -24,7 +24,7 @@ export default {
       top: 60px;
       right: 0px;
       bottom: 0px;
-      padding: 0 5px 5px;
+      padding: 20px 10px 0px 10px;
    }
    .position-left {
       left: 205px;
