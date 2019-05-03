@@ -1,7 +1,7 @@
 <template>
    <div class="headbar" :class="$store.state.app.collapse?'position-collapse-left':'position-left'">
       <hamburger :toggle-click="toggleSideBar" :is-active="$store.state.app.collapse" class="hamburger-container" />
-
+      <breadcrumb/>
       <el-dropdown class="avatar-container" >
           <span class="el-dropdown-link">
             <span>{{realName}}</span>
@@ -20,6 +20,7 @@
 </template>
 <script>
 import Hamburger from '@/components/Hamburger'
+import Breadcrumb from '@/components/Breadcrumb'
 import {logout} from '@/api/auth'
 import {getUserInfo} from '~utils/sessionStorage';
 export default {
@@ -32,13 +33,13 @@ export default {
    },
    methods:{
         userInfo(){
-            this.$router.push({ path: '/' })
+          this.$router.push({ path: '/' })
         },
         logOut(){
-              logout().then(()=>{
-                  sessionStorage.clear();
-                  this.$router.push("/login");
-              })
+          logout().then(()=>{
+              sessionStorage.clear();
+              this.$router.push("/login");
+          })
         },
         toggleSideBar() {
           this.$store.commit("toggleSideBar");
@@ -46,6 +47,7 @@ export default {
    },
     components: {
       Hamburger,
+      Breadcrumb
    },
 }
 </script>

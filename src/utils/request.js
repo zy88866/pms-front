@@ -14,14 +14,14 @@ const service  = axios.create({
 service.interceptors.request.use(function (request) {
     // 在发送请求之前做些什么
      if(request.url!=="/login"){
-         const token = getToken();
+        const token = getToken();
         if(token!==null){
           request.headers['Authorization'] = 'Bearer ' + token;
         }else{
-            refreshToken().then((res)=>{
-              request.headers['Authorization'] = 'Bearer ' + res.accessToken;
-                setToken(res);
-            })
+          refreshToken().then((res)=>{
+            request.headers['Authorization'] = 'Bearer ' + res.accessToken;
+            setToken(res);
+          })
         }
         request.headers['Content-Type'] = 'application/json'
      }
@@ -36,10 +36,10 @@ service.interceptors.response.use(function (response) {
     console.log(response);
     const res = response.data;
     if(res.code!==200){
-        if( res.code===401){
-              sessionStorage.clear();
-              localStorage.clear();
-              router.push("/login");
+        if(res.code===401){
+          sessionStorage.clear();
+          localStorage.clear();
+          router.push("/login");
         }else {
           Message({
             message: res.message,

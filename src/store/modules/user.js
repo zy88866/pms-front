@@ -3,6 +3,7 @@ export default{
         username:'',
         realName:'',
         role:'',
+        diglogStatus:false,
     },
     getters:{
         getUsername: state=>{
@@ -18,7 +19,16 @@ export default{
             state.realName = info.realName,
             state.role = info.role
         },
+        CHECK_DIALOG(state,status){
+            state.diglogStatus=status;
+        }
     },
     actions: {
+        openDialog({ commit }){
+            commit('CHECK_DIALOG',true)
+        },
+        closeDialog({ commit }){
+            commit('CHECK_DIALOG',false)
+        }
     }
 }
