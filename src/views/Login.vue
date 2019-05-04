@@ -84,13 +84,13 @@ export default {
               getUserInfo().then(res => {
                 setUserInfo(res.data)
                 this.$router.push('/')
-                this.loading = false
+                setTimeout(() => {
+                   this.loading = false;
+                }, 50);
               })
-            }).catch(() => {
-              this.loading = false
             })
         } else {
-          return false
+          return false;
         }
       })
     }

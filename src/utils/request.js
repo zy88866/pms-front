@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {setToken,getToken,getRefreshToken} from "~utils/sessionStorage"
+import {setToken,getAccessToken} from "~utils/sessionStorage"
 import router from "@/router/"
 import { refreshToken } from "@/api/auth"
 import { Message } from 'element-ui'
@@ -10,20 +10,49 @@ const service  = axios.create({
     timeout: 5000 
 });
 
+//token 刷新标志位
+window.isRefreshing = false;
+
+// 存储请求的数组
+let refreshSubscribers = [];
+
+/*将所有的请求都push到数组中*/
+function subscribeTokenRefresh(cb) {
+  refreshSubscribers.push(cb);
+}
+
+// 数组中的请求得到新的token之后自执行，用新的token去请求数据
+function onRrefreshed(accessToken) {
+  refreshSubscribers.map(cb => cb(accessToken));
+}
+
 // 添加请求拦截器
 service.interceptors.request.use(function (request) {
     // 在发送请求之前做些什么
      if(request.url!=="/login"){
-        const token = getToken();
-        if(token!==null){
-          request.headers['Authorization'] = 'Bearer ' + token;
-        }else{
-          refreshToken().then((res)=>{
-            request.headers['Authorization'] = 'Bearer ' + res.accessToken;
-            setToken(res);
-          })
-        }
         request.headers['Content-Type'] = 'application/json'
+        const token = getAccessToken();
+        if(token){
+          request.headers['Authorization'] = 'Bearer ' + token;
+        }else if(request.url.indexOf('/auth/token')===-1){
+          if(!window.isRefreshing){
+            window.isRefreshing=true;
+            refreshToken().then((res)=>{
+              window.isRefreshing = false;
+              setToken(res.data);
+              onRrefreshed(res.data.accessToken);
+              refreshSubscribers=[];
+            }).catch(err=>{
+              logout();
+            });
+            return new Promise((resolve,reject) => {
+              subscribeTokenRefresh((accessToken)=>{
+                request.headers['Authorization'] = 'Bearer ' + accessToken;
+                resolve(request);
+              }) 
+            })
+          }
+        } 
      }
     return request;
   }, function (error) {
@@ -37,9 +66,7 @@ service.interceptors.response.use(function (response) {
     const res = response.data;
     if(res.code!==200){
         if(res.code===401){
-          sessionStorage.clear();
-          localStorage.clear();
-          router.push("/login");
+          logout();
         }else {
           Message({
             message: res.message,
@@ -58,5 +85,13 @@ service.interceptors.response.use(function (response) {
       });
     return Promise.reject(error);
   });
+
+  /**
+   * 跳转到首页
+   */
+  function logout(){
+    sessionStorage.clear();
+    router.push("/login");
+  }
 
   export default service
