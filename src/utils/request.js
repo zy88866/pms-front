@@ -39,8 +39,8 @@ service.interceptors.request.use(function (request) {
             window.isRefreshing=true;
             refreshToken().then((res)=>{
               window.isRefreshing = false;
-              setToken(res.data);
-              onRrefreshed(res.data.accessToken);
+              setToken(res);
+              onRrefreshed(res.accessToken);
               refreshSubscribers=[];
             }).catch(err=>{
               logout();
@@ -62,7 +62,6 @@ service.interceptors.request.use(function (request) {
 
 // 添加响应拦截器
 service.interceptors.response.use(function (response) {
-    console.log(response);
     const res = response.data;
     if(res.code!==200){
         if(res.code===401){
@@ -75,8 +74,9 @@ service.interceptors.response.use(function (response) {
         })
         return Promise.reject(res);
     }
-  }
-     return res;
+  }else{
+    return res.data;
+  }  
   }, function (error) {
     console.log( Promise.reject(error));
       Message({

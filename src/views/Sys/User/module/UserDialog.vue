@@ -6,7 +6,7 @@
          :show-close="false"
          :close="closeDialog"
          :visible="this.$store.state.user.diglogStatus">
-         <el-form :model="resetForm"  :rules="rules"  label-width="80px" >
+         <el-form ref="resetForm" :model="resetForm"  :rules="rules"  label-width="80px" >
             <el-form-item label="用户名" prop="username">
                <el-input  v-model="resetForm.username" placeholder="请输入用户名"/>
             </el-form-item>
@@ -33,7 +33,7 @@
 
             <div style="display:flex; justify-content:flex-end;">
                <el-button @click="closeDialog">取消</el-button>
-               <el-button type="primary" @click="onSubmit">提交</el-button>
+               <el-button type="primary" @click="onSubmit('resetForm')">提交</el-button>
             </div>
 
          </el-form>
@@ -42,16 +42,17 @@
 </template>
 
 <script>
+import {createUser} from '@/api/user'
 export default {
    name: 'UserDialog',
    data() {
        return {
           resetForm: {
-            username: '',
-            realName: '',
-            password: '',
-            reqPassword: '',
-            phone: '',
+            username: 'zhangsan',
+            realName: '张三',
+            password: '123123',
+            reqPassword: '123123',
+            phone: '15665437878',
             email: '',
           },
           rules: {
@@ -97,7 +98,17 @@ export default {
    },
   methods: {
      onSubmit() {
-        
+         this.$refs.resetForm.validate(valid => {
+            if(valid){
+               createUser(this.resetForm).then((res)=>{
+                  closeDialog();  
+                  this.$message({
+                     type: "success",
+                     message: "添加成功"
+                  });
+               })
+            }
+         })
      },
      closeDialog() {
         this.$store.dispatch('closeDialog');

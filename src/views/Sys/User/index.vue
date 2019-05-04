@@ -53,8 +53,8 @@ export default {
     },
     getData () {
       getUserList().then(res => {
-        this.tableData = res.data
-        this.total = res.data.length
+        this.tableData = res,
+        this.total = res.length
       })
     },
     add () {

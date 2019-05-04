@@ -7,16 +7,15 @@
       :rules="loginRules"
       label-position="left"
       label-width="0px"
-      class="login-form"
-    >
+      class="login-form">
+
       <h3 class="title">物业管理系统</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
           type="text"
           auto-complete="off"
-          placeholder="账号"
-        >
+          placeholder="账号">
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -25,8 +24,7 @@
           type="password"
           auto-complete="off"
           placeholder="密码"
-          @keyup.enter.native="handleLogin"
-        >
+          @keyup.enter.native="handleLogin">
         </el-input>
       </el-form-item>
       <el-checkbox
@@ -39,8 +37,7 @@
           size="medium"
           type="primary"
           style="width:100%;"
-          @click.native.prevent="handleLogin"
-        >
+          @click.native.prevent="handleLogin">
           <span v-if="!loading">登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
@@ -79,10 +76,10 @@ export default {
           // 登陆对象实体
           login(this.loginForm.username, this.loginForm.password)
             .then(res => {
-              setToken(res.data)
+              setToken(res)
             }).then(res => {
               getUserInfo().then(res => {
-                setUserInfo(res.data)
+                setUserInfo(res)
                 this.$router.push('/')
                 setTimeout(() => {
                    this.loading = false;

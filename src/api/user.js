@@ -2,7 +2,7 @@ import request from '../utils/request'
 
   export function getUserInfo() {
     return request({
-      url: 'user/info',
+      url: '/user/info',
       method: 'get',
     })
   }
@@ -23,7 +23,7 @@ import request from '../utils/request'
 
   export function createUser(user){
     return request({
-      url: 'user',
+      url: '/user',
       method: 'post',
       data: user,
     })
