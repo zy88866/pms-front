@@ -1,6 +1,6 @@
 <template>
    <div class="app-container">
-    <!-- <role-header/> -->
+    <role-header/>
     <!--表格渲染-->
     <el-table :data="tableData" size="small" border class="table-container">
       <el-table-column type="selection" width="50px" align="center" >  </el-table-column>
@@ -25,8 +25,9 @@
 </template>
 
 <script>
+import RoleHeader from './module/RoleHeader'
 export default {
-   name: '',
+   name: 'Role',
    data() {
        return {
       
@@ -40,7 +41,7 @@ export default {
 
       }
    },
-   mounted(){
+   mounted() { //页面初始化方法
       this.$store.dispatch("role/findRoleAll");
    },
    computed: {
@@ -52,7 +53,7 @@ export default {
       }
    },
    components: {
-
+      RoleHeader,
    }
 }
 </script>

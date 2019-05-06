@@ -57,8 +57,8 @@ function addDynamicMenuAndRoutes (next, to) {
     loadCurrMenu().then(res => {
       if (res!== undefined) {
         const asyncRouter = filterAsyncRouter(res)
-        store.dispatch('GenerateRoutes', asyncRouter).then(() => { // 存储路由
-          store.commit('setLoadMenus', true)
+        store.dispatch('menu/GenerateRoutes', asyncRouter).then(() => { // 存储路由
+          store.commit('app/setLoadMenus', true)
           // 动态添加可访问路由表
           router.addRoutes(asyncRouter)
           next({ ...to, replace: true })// hack方法 确保addRoutes已完成

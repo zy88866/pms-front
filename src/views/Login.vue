@@ -83,8 +83,10 @@ export default {
                 this.$router.push('/')
                 setTimeout(() => {
                    this.loading = false;
-                }, 50);
+                }, 200);
               })
+            }).catch(err =>{
+                this.loading = false;
             })
         } else {
           return false;

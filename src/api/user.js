@@ -28,3 +28,33 @@ import request from '../utils/request'
       data: user,
     })
   }
+
+  export function deleteUser(id){
+    return request({
+      url:'/user/'+id,
+      method: 'delete',
+    })
+  }
+
+  export function search(user){
+    return request({
+      url: '/user/search',
+      method: 'get',
+      params: user,
+    })
+  }
+
+  export function editUser(user){
+    return request({
+      url: '/user/edit',
+      method: 'put',
+      data: user,
+    })
+  }
+
+  export function getUser(id){
+    return request({
+      url: '/user/'+id,
+      mothod: 'get', 
+    })
+  }

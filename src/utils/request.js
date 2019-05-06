@@ -28,31 +28,31 @@ function onRrefreshed(accessToken) {
 
 // 添加请求拦截器
 service.interceptors.request.use(function (request) {
-    // 在发送请求之前做些什么
-     if(request.url!=="/login"){
-        request.headers['Content-Type'] = 'application/json'
-        const token = getAccessToken();
-        if(token){
-          request.headers['Authorization'] = 'Bearer ' + token;
-        }else if(request.url.indexOf('/auth/token')===-1){
-          if(!window.isRefreshing){
-            window.isRefreshing=true;
-            refreshToken().then((res)=>{
-              window.isRefreshing = false;
-              setToken(res);
-              onRrefreshed(res.accessToken);
-              refreshSubscribers=[];
-            }).catch(err=>{
-              logout();
-            });
-            return new Promise((resolve,reject) => {
-              subscribeTokenRefresh((accessToken)=>{
-                request.headers['Authorization'] = 'Bearer ' + accessToken;
-                resolve(request);
-              }) 
-            })
-          }
-        } 
+  // 在发送请求之前做些什么
+    if(request.url!=="/login"){
+      request.headers['Content-Type'] = 'application/json'
+      const token = getAccessToken();
+      if(token){
+        request.headers['Authorization'] = 'Bearer ' + token;
+      }else if(request.url.indexOf('/auth/token')===-1){
+        if(!window.isRefreshing){
+          window.isRefreshing=true;
+          refreshToken().then((res)=>{
+            window.isRefreshing = false;
+            setToken(res);
+            onRrefreshed(res.accessToken);
+            refreshSubscribers=[];
+          }).catch(err=>{
+            logout();
+          });
+          return new Promise((resolve,reject) => {
+            subscribeTokenRefresh((accessToken)=>{
+              request.headers['Authorization'] = 'Bearer ' + accessToken;
+              resolve(request);
+            }) 
+          })
+        }
+      } 
      }
     return request;
   }, function (error) {

@@ -1,4 +1,5 @@
 export default  {
+    namespaced: true,
     state: {
         collapse:false,     //菜单栏是否折叠
         loadMenus: false // 菜单和路由加载状态
