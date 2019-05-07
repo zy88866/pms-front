@@ -75,7 +75,7 @@ export default {
    },
    computed: {
       ...mapState({
-         roleData: state=> state.role.tableData
+         roleData: state=> state.role.table.data
       })
    },
    mounted() { //页面初始化方法

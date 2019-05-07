@@ -44,7 +44,7 @@ export default{
             dispatch('openDialog');
             commit('CHECK_IS_ADD',true);
         },
-        async editDialog({commit,dispatch},id){``
+        async editDialog({commit,dispatch},id){
             dispatch('openDialog');
             commit('CHECK_IS_ADD',false);
             const user=await dispatch('getUser',id)

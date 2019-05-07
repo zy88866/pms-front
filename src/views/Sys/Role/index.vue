@@ -1,14 +1,15 @@
 <template>
    <div class="app-container">
-    <role-header/>
+    <role-header :check-list="checkList"/>
     <!--表格渲染-->
-    <el-table :data="tableData" size="small" border class="table-container">
+    <el-table :data="tableData" size="small" border class="table-container" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50px" align="center" >  </el-table-column>
-      <el-table-column  prop="name" label="角色" align="center"  ></el-table-column>
-      <el-table-column  prop="remark" label="备注" align="center"  ></el-table-column>
+      <el-table-column  prop="name" label="名称" align="center" width="200px"></el-table-column>
+      <el-table-column  prop="citeNum" label="所含用户数" align="center"  width="100px"></el-table-column>
+      <el-table-column  prop="remark" label="描述" align="center"  ></el-table-column>
       <el-table-column label="操作" align="center"  width="150px">
         <template slot-scope="scope">
-        <el-button size="mini"  @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        <el-button size="mini"  @click="handleEdit(scope.row.id)">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -20,6 +21,8 @@
       layout="sizes,prev,pager,next"
       @size-change="sizeChange"
       @current-change="pageChange"/>
+
+   <role-dialog :role-form="roleFrom" @cleakData="clearData"/>
    </div>
 </template>
 
@@ -46,18 +49,37 @@ export default {
    },
    data() {
        return {
-      
+          roleFrom:{
+             id:'',
+             name: '',
+             remark: '',
+             menus:[],
+          },
+          checkList:[],
        }
    },
    methods: {
       ...mapActions({
          findRoleAll: 'role/findRoleAll',
+         editDialog: 'role/editDialog',
       }),
       sizeChange(){
 
       },
       pageChange(){
 
+      },
+      handleSelectionChange(val){
+         this.checkList=val;
+      },
+      handleEdit(id){
+         this.editDialog(id).then((data)=>{
+            console.log(data);
+            this.roleFrom=data;
+         });
+      },
+      clearData(){
+        Object.assign(this.$data, this.$options.data())
       }
    },
 }

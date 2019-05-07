@@ -78,8 +78,8 @@ export default {
    name: 'UserDialog',
    computed: {
       ...mapState({
-         diglogStatus: state => state.role.diglogStatus,
-         roleData: state => state.role.tableData,
+         diglogStatus: state => state.user.diglogStatus,
+         roleData: state => state.role.table.data,
          isAdd: state => state.user.isAdd,
       })
    },
@@ -158,7 +158,6 @@ export default {
                         this.findAll();
                   })
                }else{
-                  console.log("ssss",this.resetForm);
                   this.editUser(this.resetForm).then(()=>{
                         this.cancel();
                         this.$notify({
