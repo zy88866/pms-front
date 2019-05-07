@@ -80,7 +80,7 @@ export default {
             }).then(res => {
               getUserInfo().then(res => {
                 setUserInfo(res)
-                this.$router.push('/')
+                this.$router.push('/home')
                 setTimeout(() => {
                    this.loading = false;
                 }, 200);

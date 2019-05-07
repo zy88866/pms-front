@@ -11,8 +11,9 @@
                </el-col>
                 <el-col :span="6" :offset="10">
                   <div class="serch-button">
-                    <el-button size="medium"  type="success" icon="el-icon-plus" @click="openDialog" >添加</el-button>
                     <el-button size="medium"  type="primary" icon="el-icon-search">搜索</el-button>
+                    <el-button size="medium"  type="success" icon="el-icon-plus" @click="openDialog" >添加</el-button>
+                    <el-button size="medium"  type="danger" icon="el-icon-delete">删除</el-button>
                   </div>
                 </el-col>
             </el-row>

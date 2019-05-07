@@ -6,10 +6,9 @@
       <el-table-column type="selection" width="50px" align="center" >  </el-table-column>
       <el-table-column  prop="name" label="角色" align="center"  ></el-table-column>
       <el-table-column  prop="remark" label="备注" align="center"  ></el-table-column>
-      <el-table-column label="操作" align="center"  width="200px">
+      <el-table-column label="操作" align="center"  width="150px">
         <template slot-scope="scope">
         <el-button size="mini"  @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button size="mini"  type="danger"  @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -25,15 +24,35 @@
 </template>
 
 <script>
+import {mapState,mapActions} from 'vuex'
 import RoleHeader from './module/RoleHeader'
+import RoleDialog from './module/RoleDialog'
 export default {
    name: 'Role',
+   components: {
+      RoleHeader,
+      RoleDialog,
+   },
+   //页面初始化方法向后台请求数据
+   mounted() { 
+      this.findRoleAll();
+   },
+   //计算属性 监听vuex中的数据
+   computed: {
+      ...mapState({
+         tableData: state => state.role.table.data,
+         total: state => state.role.table.total,
+      })
+   },
    data() {
        return {
       
        }
    },
    methods: {
+      ...mapActions({
+         findRoleAll: 'role/findRoleAll',
+      }),
       sizeChange(){
 
       },
@@ -41,20 +60,6 @@ export default {
 
       }
    },
-   mounted() { //页面初始化方法
-      this.$store.dispatch("role/findRoleAll");
-   },
-   computed: {
-      tableData() {
-          return this.$store.state.role.tableData;
-      },
-      total(){
-         return this.$store.state.role.total;
-      }
-   },
-   components: {
-      RoleHeader,
-   }
 }
 </script>
 

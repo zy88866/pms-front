@@ -7,8 +7,8 @@
             <img v-else src="@/assets/img/logo.png"/>
         </div>
        <!-- 导航菜单 -->
-        <el-menu  default-active="101" class="menu" background-color="#304156" text-color="#bfcbd9" :class="collapse?'menu-bar-collapse-width':'menu-bar-width'"
-        active-text-color="#409EFF"  :collapse="collapse" :collapse-transition="false">
+        <el-menu  :default-active="this.$route.path" class="menu" background-color="#304156" text-color="#bfcbd9" :class="collapse?'menu-bar-collapse-width':'menu-bar-width'"
+        active-text-color="#409EFF"  :collapse="collapse" :collapse-transition="false" :unique-opened="true">
            <!-- 导航菜单树组件，动态加载菜单 -->
              <menu-tree v-for="item in navTree" :key="item.id" :menu="item"></menu-tree>
         </el-menu>
@@ -28,9 +28,15 @@ export default {
         navTree: state => state.menu.addRouters,
     }),
     mounted(){
-        // 默认打开第一个
+        // console.log()
+        //判断菜单列表是否返回
         if(this.navTree.length>1&&this.navTree[0].children.length>1){
+            const path=this.$router.currentRoute.path;
+            if(path==='/home'){
                 this.$router.push(this.navTree[0].children[0].path);
+            }else{
+                this.$router.push(path);
+            }
         }
     }
 }

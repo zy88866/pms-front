@@ -10,7 +10,7 @@ const router = new Router({
   mode: 'history', // 后端支持可开
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: '首页',
       component: resolve => require(['@/views/layout/Layout'], resolve),
       children: []
@@ -33,7 +33,7 @@ router.beforeEach((to, from, next) => {
   let username = getUserInfo()
   if (to.path === '/login') {
     if (username) {
-      next({path: '/'})
+      next({path: '/home'})
     } else {
       next()
     }
