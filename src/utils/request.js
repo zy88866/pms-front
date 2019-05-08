@@ -90,8 +90,8 @@ service.interceptors.response.use(function (response) {
    * 跳转到首页
    */
   function logout(){
-    sessionStorage.clear();
     self.location.href="/login"
+    sessionStorage.clear();
   }
 
   export default service
