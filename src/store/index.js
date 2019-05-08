@@ -4,6 +4,7 @@ import app from './modules/app'
 import menu from './modules/menu'
 import user from './modules/user'
 import role from './modules/role'
+import costSet from './modules/costSet'
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         app: app,
         menu: menu,
         user: user,
-        role: role
+        role: role,
+        costSet: costSet
     }
 })

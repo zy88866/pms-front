@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {setToken,getAccessToken} from "~utils/sessionStorage"
-import router from "@/router/"
 import { refreshToken } from "@/api/auth"
 import { Message } from 'element-ui'
 

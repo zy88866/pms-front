@@ -17,7 +17,7 @@ export default  {
             state.loadMenus = loadMenus;
         }
     },
-    action: {
+    actions: {
         updateLoadMenus({ commit },status) {
             return new Promise((resolve, reject) => {
               commit('setLoadMenus', status)

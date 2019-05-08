@@ -18,9 +18,7 @@
       background
       :total="total"
       style="margin-top:8px; float:right"
-      layout="sizes,prev,pager,next"
-      @size-change="sizeChange"
-      @current-change="pageChange"/>
+      layout="sizes,prev,pager,next"/>
 
    <role-dialog  ref="RoleDialog" :role-form="roleFrom" @clearData="clearData"/>
    </div>
@@ -63,12 +61,6 @@ export default {
          findRoleAll: 'role/findRoleAll',
          editDialog: 'role/editDialog',
       }),
-      sizeChange(){
-
-      },
-      pageChange(){
-
-      },
       handleSelectionChange(val){
          this.checkList=val;
       },
