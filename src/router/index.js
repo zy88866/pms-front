@@ -25,10 +25,6 @@ const router = new Router({
       name: '错误页面',
       component: resolve => require(['@/views/Error/404.vue'], resolve)
     },
-    {
-      path: "*",
-      redirect: "/404"
-    }
   ]
 })
 
@@ -61,6 +57,10 @@ function addDynamicMenuAndRoutes (next, to) {
     loadCurrMenu().then(res => {
       if (res!== undefined) {
         const asyncRouter = filterAsyncRouter(res)
+        asyncRouter.push({
+          path: "*",
+          redirect: "/404"
+        })
         store.dispatch('menu/GenerateRoutes', asyncRouter).then(() => { // 存储路由
           store.commit('app/setLoadMenus', true)
           // 动态添加可访问路由表
