@@ -23,6 +23,7 @@ import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import {logout} from '@/api/auth'
 import {getUserInfo} from '~utils/sessionStorage';
+import {mapMutations} from 'vuex'
 export default {
    name: 'TitleBar',
    data() {
@@ -33,7 +34,7 @@ export default {
    },
    methods:{
         userInfo(){
-          this.$router.push({ path: '/' })
+          this.$router.push({ path: '/home' })
         },
         logOut(){
           logout().then(()=>{
@@ -41,9 +42,9 @@ export default {
               this.$router.push("/login");
           })
         },
-        toggleSideBar() {
-          this.$store.commit("toggleSideBar");
-        },
+        ...mapMutations({
+          toggleSideBar: 'app/toggleSideBar'
+        }),
    },
     components: {
       Hamburger,

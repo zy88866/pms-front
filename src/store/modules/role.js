@@ -1,4 +1,5 @@
 import {findAll,createRole,search,findAllMenus,batchDelete,editRole,findOne} from '@/api/role'
+import { setTimeout } from 'timers';
 export default {
     namespaced: true,
     state:{
@@ -27,21 +28,22 @@ export default {
     },
      actions: {
         async openDialog({commit}){
-            commit('CHECK_DIALOG',true);
-            const menus=await findAllMenus();
-            const list=JSON.parse(JSON.stringify(menus).replace(/name/g,'label'));
+            const menus= await findAllMenus();
+            const list = await JSON.parse(JSON.stringify(menus).replace(/name/g,'label'));
             commit('FIND_MENUS',list);
+            commit('CHECK_DIALOG',true);
         },
         closeDialog({commit}){
             commit('CHECK_DIALOG',false);
         },
         addDialog({commit,dispatch}){
-            dispatch('openDialog');
             commit('CHECK_IS_ADD',true);
+            dispatch('openDialog');
+            setTimeout(()=>200);
         },
         editDialog({commit,dispatch},id){
-            dispatch('openDialog');
             commit('CHECK_IS_ADD',false);
+            dispatch('openDialog');
             const data=dispatch('findOne',id);
             return data;
         },

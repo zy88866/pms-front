@@ -2,7 +2,7 @@
    <div class="menu-bar-container">
         <!-- logo -->
         <div class="logo"
-         :class="collapse?'menu-bar-collapse-width':'menu-bar-width'" @click="$router.push('/')">
+         :class="collapse?'menu-bar-collapse-width':'menu-bar-width'" @click="$router.push('/home')">
             <i v-if="collapse" class="pms-icon-run" />
             <img v-else src="@/assets/img/logo.png"/>
         </div>
@@ -28,9 +28,8 @@ export default {
         navTree: state => state.menu.addRouters,
     }),
     mounted(){
-        // console.log()
         //判断菜单列表是否返回
-        if(this.navTree.length>1&&this.navTree[0].children.length>1){
+        if(this.navTree.length>0&&this.navTree[0].children.length>0){
             const path=this.$router.currentRoute.path;
             if(path==='/home'){
                 this.$router.push(this.navTree[0].children[0].path);

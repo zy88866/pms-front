@@ -24,6 +24,10 @@ const router = new Router({
       path: '/404',
       name: '错误页面',
       component: resolve => require(['@/views/Error/404.vue'], resolve)
+    },
+    {
+      path: "*",
+      redirect: "/404"
     }
   ]
 })

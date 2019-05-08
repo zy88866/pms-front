@@ -22,7 +22,7 @@
       @size-change="sizeChange"
       @current-change="pageChange"/>
 
-   <role-dialog :role-form="roleFrom" @cleakData="clearData"/>
+   <role-dialog  ref="RoleDialog" :role-form="roleFrom" @clearData="clearData"/>
    </div>
 </template>
 
@@ -74,12 +74,12 @@ export default {
       },
       handleEdit(id){
          this.editDialog(id).then((data)=>{
-            console.log(data);
             this.roleFrom=data;
+            this.$refs.RoleDialog.setCheckedNodes(data.menus);
          });
       },
       clearData(){
-        Object.assign(this.$data, this.$options.data())
+        Object.assign(this.$data.roleFrom, this.$options.data().roleFrom);
       }
    },
 }

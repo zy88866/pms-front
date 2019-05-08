@@ -25,9 +25,7 @@
                 show-checkbox
                 node-key="id"
                 ref="tree"
-                highlight-current
-                @check-change="handleCheckChange"
-                :props="roleForm.menus">
+                highlight-current>
               </el-tree>
             </el-form-item>
           </el-col>
@@ -76,17 +74,20 @@ export default {
     ...mapActions({
       closeDialog: 'role/closeDialog',
       createRole: 'role/createRole',
+      editRole: 'role/editRole',
       findRoleAll: 'role/findRoleAll'
     }),
     cancel(){
       this.$emit("clearData");
+      this.$refs['tree'].setCheckedKeys([]);
+      this.$refs['roleForm'].resetFields();
       this.closeDialog();
     },
     onSubmit(){
       this.$refs.roleForm.validate(valid => {
           if(valid){
             //选中菜单
-            this.roleForm.menus=this.checkMenuTree(this.menus);
+            this.roleForm.menus=this.$refs.tree.getCheckedNodes(false,true);
             if(this.isAdd){
               this.createRole(this.roleForm).then(()=>{
                 this.cancel();
@@ -98,31 +99,25 @@ export default {
                 this.findRoleAll();
               })
             }else{
-
+              this.editRole(this.roleForm).then(()=>{
+                this.cancel();
+                this.$notify({
+                  title: '编辑成功',
+                  type: 'success',
+                  duration: 1500,
+                }) ;
+                this.findRoleAll();
+              })
             }
           }
       })
     },
-    checkMenuTree(data){
-        let arr=[];
-        let ids = this.$refs.tree.getCheckedNodes(false,true).map(item => item.id);
-        data.forEach((parent,index)=> {
-          if(ids.findIndex(id =>id==parent.id)!==-1){
-            parent.children.forEach((item,idx) => {
-            if(ids.findIndex(element => element==item.id)==-1){
-              parent.children.splice(idx,1)
-            }
-          })
-          arr.push(parent);
-        }   
+    setCheckedNodes(data){
+       this.$nextTick(function() {
+          const ids=data.map(item => item.id);
+          this.$refs['tree'].setCheckedKeys(ids);
       })
-      return arr;
-    },
-    handleCheckChange(data, checked, indeterminate) {
-       // console.log(this.$refs.tree.getCurrentNode());
-        //console.log(data);
-        this.roleForm.menus.push(data);
-      },
+    }
   },
 }
 </script>
