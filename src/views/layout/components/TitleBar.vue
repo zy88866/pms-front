@@ -2,17 +2,17 @@
    <div class="headbar" :class="$store.state.app.collapse?'position-collapse-left':'position-left'">
       <hamburger :toggle-click="toggleSideBar" :is-active="$store.state.app.collapse" class="hamburger-container" />
       <breadcrumb/>
-      <el-dropdown class="avatar-container" >
+      <el-dropdown class="avatar-container" :hide-timeout="300" placement="bottom-start">
           <span class="el-dropdown-link">
             <span>{{realName}}</span>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                        <span @click="userInfo"> 个人中心 </span>
+                  <span @click="userInfo"> 个人中心 </span>
                 </el-dropdown-item>
               <el-dropdown-item >
-                        <span @click="logOut"> 退出登陆</span>
+                  <span @click="logOut"> 退出登陆</span>
               </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -39,7 +39,7 @@ export default {
         logOut(){
           logout().then(()=>{
               sessionStorage.clear();
-              this.$router.push("/login");
+              self.location.href="/login"
           })
         },
         ...mapMutations({

@@ -91,7 +91,7 @@ service.interceptors.response.use(function (response) {
    */
   function logout(){
     sessionStorage.clear();
-    router.push("/login");
+    self.location.href="/login"
   }
 
   export default service
