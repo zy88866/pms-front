@@ -35,3 +35,9 @@ server {
     }
 }
 ```
+
+## 阿里矢量图标使用
+1. 下载 Font class 文件到本地
+2. 拷贝 iconfont.woff iconfont.ttf iconfont.svg icon.eot 文件到 src/assets/icon 目录下
+3. 将iconfont.css 中 头替换 添加对应的icon 
+4. 在页面中使用 ``` <i class="pms-icon-**"/> ```
