@@ -29,7 +29,7 @@ export default {
     }),
     mounted(){
         //判断菜单列表是否返回
-        if(this.navTree.length>0&&this.navTree[0].children.length>0){
+        if(this.navTree!==undefined &&this.navTree[0].children!==undefined){
             const path=this.$router.currentRoute.path;
             if(path==='/home'){
                 this.$router.push(this.navTree[0].children[0].path);
