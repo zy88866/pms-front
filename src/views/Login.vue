@@ -100,12 +100,12 @@ export default {
 
 <style lang="less" scoped>
     .login{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-image:url(	https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/1547428971990.jpg);
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         background-image:url('../assets/img/bg.jpg');
          background-size: cover;
-        height: 100%;
+         height: 100%;
     }
      .title {
         margin: 0px auto 40px auto;
@@ -120,7 +120,7 @@ export default {
         .el-input {
         height: 38px;
         input {
-            height: 38px;
+          height: 38px;
         }
     }
   }
