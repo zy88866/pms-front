@@ -16,17 +16,43 @@
 </template>
 
 <script  >
- import { mapState } from 'vuex'
+ import { mapState,mapMutations} from 'vuex'
  import MenuTree from '@/components/MenuTree'
 export default {
    name: 'Sidebar',
    components:{
        MenuTree
    },
+   data() {
+       return{
+           screenWidth: document.body.clientWidth, //屏幕宽度
+           timer: false,
+       }
+   },
    computed: mapState({
         collapse: state => state.app.collapse,
         navTree: state => state.menu.addRouters,
     }),
+    watch: {
+        screenWidth (val) {
+            if (!this.timer) {
+                this.screenWidth = val
+                if (this.screenWidth < 768) {
+                    this.hideMenu();
+                }
+                this.timer = true;
+                let that = this;
+                setTimeout(function () {
+                that.timer = false;
+                }, 400)
+            }
+        }
+    }, 
+    methods:{
+         ...mapMutations({
+             'hideMenu': 'app/hideMenu'
+         }),
+    },
     mounted(){
         //判断菜单列表是否返回
         if(this.navTree!==undefined &&this.navTree[0].children!==undefined){
@@ -36,6 +62,12 @@ export default {
             }else{
                 this.$router.push(path);
             }
+        }
+         // 监听窗口大小
+        window.onresize = () => {
+            return (() => {
+                this.screenWidth = document.body.clientWidth
+            })()
         }
     }
 }

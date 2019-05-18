@@ -13,6 +13,9 @@ export default  {
         toggleSideBar(state){  // 改变收缩状态
             state.collapse = !state.collapse
         },
+        hideMenu(state){ //隐藏菜单
+            state.collapse = true
+        },
         setLoadMenus(state, loadMenus){  // 改变菜单和路由的加载状态
             state.loadMenus = loadMenus;
         }

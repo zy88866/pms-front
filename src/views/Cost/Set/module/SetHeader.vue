@@ -40,6 +40,7 @@ export default {
   methods:{
     ...mapActions({
         search: 'costSet/search',
+        addDialog: 'costSet/addDialog'
     }),
     searchData(){
       this.search({

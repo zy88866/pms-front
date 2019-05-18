@@ -65,7 +65,7 @@ export default {
   },
   computed: {
       ...mapState({
-        isAdd: state => state.costSet.isAdd,
+         isAdd: state => state.costSet.isAdd,
          diglogStatus: state => state.costSet.diglogStatus,
          pageSize: state => state.costSet.table.pageSize,
          currentPage: state => state.costSet.table.currentPage,
