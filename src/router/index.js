@@ -57,12 +57,10 @@ function addDynamicMenuAndRoutes (next, to) {
     loadCurrMenu().then(res => {
       if (res!== undefined) {
         const asyncRouter = filterAsyncRouter(res)
-        asyncRouter.push({
-          path: "*",
-          redirect: "/404"
-        })
-        store.dispatch('menu/GenerateRoutes', asyncRouter).then(() => { // 存储路由
-          store.commit('app/setLoadMenus', true)
+        const addRoutes = JSON.parse(JSON.stringify(asyncRouter));
+        addRoutes.pop();
+        store.dispatch('menu/GenerateRoutes', addRoutes).then(() => { // 存储路由
+          store.commit('app/setLoadMenus', true);
           // 动态添加可访问路由表
           router.addRoutes(asyncRouter)
           next({ ...to, replace: true })// hack方法 确保addRoutes已完成
@@ -88,6 +86,11 @@ function filterAsyncRouter (routers) {
     }
     return true
   })
+  //添加404节点
+  accessedRouters.push({
+    path: "*",
+    redirect: "/404"
+  });
   return accessedRouters
 }
 
