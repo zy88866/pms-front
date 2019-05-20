@@ -6,6 +6,7 @@ import user from './modules/user'
 import role from './modules/role'
 import costSet from './modules/costSet'
 import house from './modules/house'
+import door from './modules/door'
 
 Vue.use(Vuex);
 
@@ -17,5 +18,6 @@ export default new Vuex.Store({
         role: role,
         costSet: costSet,
         house: house,
+        door: door,
     }
 })

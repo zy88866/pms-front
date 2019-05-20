@@ -69,7 +69,6 @@ export default {
    },
    methods: {
      ...mapActions({
-        getUserList: 'house/getUserList',
         findAll: 'house/findAll',
         editDialog: 'house/editDialog',
     }),
@@ -83,7 +82,7 @@ export default {
        })
     },
     pageChange(currPage){
-
+      this.findAll({"page":currPage-1,"size":this.pageSize});
     },
     handleSelectionChange(val){
       this.deleteList=val.map((item)=>item.id);
@@ -91,9 +90,6 @@ export default {
     clearData(){
       Object.assign(this.$data, this.$options.data());
     }
-   },
-   created(){
-     this.getUserList();
    }
 }
 </script>

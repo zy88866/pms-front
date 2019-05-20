@@ -70,8 +70,7 @@ export default {
         },{
           value: 'LOW',
           label: '低层'
-        },
-        ],
+        }],
         rules:{
           cellName:[
              {required:true,message:'小区名称不能为空', trigger:'blur'},

@@ -39,7 +39,7 @@ export default {
       }
     }
   },
-  computed: {
+  computed:{
     ...mapState({
         userList:  state => state.house.userList,
         pageSize: state => state.house.table.pageSize,
@@ -51,8 +51,12 @@ export default {
       required: true
     }
    },
+  mounted() { 
+    this.getUserList();
+  },
   methods: {
     ...mapActions({
+      getUserList: 'house/getUserList',
       addDialog: 'house/addDialog',
       batchDelete: 'house/batchDelete',
       findAll: 'house/findAll',
