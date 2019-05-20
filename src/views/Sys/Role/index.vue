@@ -3,7 +3,7 @@
     <role-header :check-list="checkList"/>
     <!--表格渲染-->
     <el-table :data="tableData" size="small" border class="table-container" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="50px" align="center" >  </el-table-column>
+      <el-table-column  type="index" width="50px" align="center" label="序号">  </el-table-column>
       <el-table-column  prop="name" label="名称" align="center" width="200px"></el-table-column>
       <el-table-column  prop="citeNum" label="所含用户数" align="center"  width="100px"></el-table-column>
       <el-table-column  prop="remark" label="描述" align="center"  ></el-table-column>

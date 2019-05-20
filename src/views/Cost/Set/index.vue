@@ -3,7 +3,7 @@
     <set-header/>
     <!--表格渲染-->
     <el-table :data="tableData" size="small" border class="table-container">
-      <el-table-column type="selection" width="50px" align="center" >  </el-table-column>
+      <el-table-column  type="index" width="50px" align="center" label="序号">  </el-table-column>
       <el-table-column  prop="costName" label="费用名称" align="center"></el-table-column>
       <el-table-column  prop="costPrice" label="价格" align="center">
            <template slot-scope="scope">

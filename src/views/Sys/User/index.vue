@@ -3,7 +3,7 @@
     <user-header/>
     <!--表格渲染-->
     <el-table :data="data" size="small" border class="table-container" v-loading="loading">
-      <el-table-column type="selection" width="50px" align="center" >  </el-table-column>
+      <el-table-column  type="index" width="50px" align="center" label="序号">  </el-table-column>
       <el-table-column  prop="username" label="用户名" align="center"  ></el-table-column>
       <el-table-column  prop="realName" label="姓名" align="center"></el-table-column>
       <el-table-column  prop="phone" label="手机号" align="center"></el-table-column>
