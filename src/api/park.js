@@ -1,16 +1,16 @@
 import request from '../utils/request'
 
-export function create(door){
+export function create(park){
     return new request({
-        url: '/door',
+        url: '/park',
         method: 'POST',
-        data: door
+        data: park
     })
 }
 
 export function findAll(page,size){
     return new request({
-        url: '/door/all',
+        url: '/park/all',
         method: 'GET',
         params:{
             "page": page,
@@ -21,7 +21,7 @@ export function findAll(page,size){
 
 export function search(id,page,size){
     return new request({
-        url: '/door/search?userId='+id,
+        url: '/park/search?userId='+id,
         method: 'GET',
         params:{
             "page": page,
@@ -30,10 +30,10 @@ export function search(id,page,size){
     })
 }
 
-export function updateStatus(door){
+export function updateStatus(park){
     return new request({
-        url: '/door/updateStatus',
+        url: '/park/updateStatus',
         method: 'PUT',
-        data: door
+        data: park
     })
 }
