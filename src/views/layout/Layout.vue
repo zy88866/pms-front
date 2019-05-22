@@ -1,25 +1,43 @@
 <template>
    <div class="app-wrapper">
-            <sidebar class="sidebar-container"/>
-            <div class="main-container"> 
-                <title-bar/>
-                <app-main/>
-            </div>
+        <sidebar class="sidebar-container"/>
+        <div class="main-container"> 
+            <title-bar :real-name="passwordFrom.realName"/>
+            <app-main/>
+        </div>
+        <edit-password :password-from="passwordFrom" @clearData="clearData"/>
    </div>
 </template>
 
 <script>
+import {getUserInfo} from '~utils/sessionStorage';
 import  {AppMain,Sidebar,TitleBar} from './components'
-
+import EditPassword from './EditPassword'
 export default {
    name: 'Layout',
     components: {
          AppMain,
          TitleBar,
-         Sidebar
+         Sidebar,
+         EditPassword,
      },
+
    data() {
-       return {}
+      const {id,realName}=getUserInfo();
+       return {
+          passwordFrom:{
+           id:id,
+           realName:realName,
+           oldPassword:'',
+           newPassword:'',
+           reqPassword:'',
+         }
+       }
+   },
+   methods:{
+    clearData(){
+      Object.assign(this.$data, this.$options.data());
+    },
    }
 
 }

@@ -8,7 +8,7 @@
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="userInfo">个人中心</el-dropdown-item>
+              <el-dropdown-item @click.native="openDialog">修改密码</el-dropdown-item>
               <el-dropdown-item @click.native="logOut">退出登陆</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -18,20 +18,15 @@
 import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import {logout} from '@/api/auth'
-import {getUserInfo} from '~utils/sessionStorage';
-import {mapMutations} from 'vuex'
+import {mapMutations, mapActions} from 'vuex'
 export default {
    name: 'TitleBar',
    data() {
-      const {realName}=getUserInfo();
-       return {
-         realName
-       }
+     return{
+
+     }
    },
    methods:{
-        userInfo(){
-          this.$router.push({ path: '/home' })
-        },
         logOut(){
           logout().then(()=>{
               self.location.href="/login"
@@ -39,13 +34,22 @@ export default {
           })
         },
         ...mapMutations({
-          toggleSideBar: 'app/toggleSideBar'
+          toggleSideBar: 'app/toggleSideBar',
         }),
+        ...mapActions({
+            openDialog: 'app/openDialog'
+        })
    },
     components: {
       Hamburger,
-      Breadcrumb
+      Breadcrumb,
    },
+   props:{
+     realName:{
+       type:String,
+       required:true
+     }
+   }
 }
 </script>
 

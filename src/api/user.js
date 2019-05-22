@@ -58,3 +58,11 @@ import request from '../utils/request'
       mothod: 'get', 
     })
   }
+
+export function updatePassword(user){
+  return request({
+    url: '/user/updatePassword',
+    method: 'post',
+    data: user,
+  })
+}
