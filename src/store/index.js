@@ -10,6 +10,7 @@ import door from './modules/door'
 import park from './modules/park'
 import recharge from './modules/recharge'
 import payment from './modules/payment'
+import repairs from './modules/repairs'
 
 Vue.use(Vuex);
 
@@ -24,6 +25,7 @@ export default new Vuex.Store({
         door: door,
         park: park,
         recharge: recharge,
-        payment: payment
+        payment: payment,
+        repairs: repairs
     }
 })
