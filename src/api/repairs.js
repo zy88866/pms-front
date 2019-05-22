@@ -42,3 +42,10 @@ export function endDispatch(repair){
         data:repair
     })
 }
+
+export function report(userId){
+    return new request({
+        url: '/repairs/report?userId='+userId,
+        method: 'GET',
+    })
+}

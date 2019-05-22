@@ -15,8 +15,8 @@
         </el-col>
 
         <el-col>
-            <el-form-item label="维修费用" prop="RepairsPrice">
-                <el-input-number v-model="centerForm.RepairsPrice"  placeholder="请输入维修费用" :min="0" :precision="2"/>
+            <el-form-item label="维修费用" prop="repairsPrice">
+                <el-input-number v-model="centerForm.repairsPrice"  placeholder="请输入维修费用" :min="0" :precision="2"/>
             </el-form-item>
         </el-col>
       
@@ -40,7 +40,7 @@ export default {
     return {
         rules:{
             repairsBillNo:{required:true,message:'维修单号不能为空', trigger:'blur'},
-            RepairsPrice:{required:true,message:'维修价格不能为空', trigger:'blur'}
+            repairsPrice:{required:true,message:'维修价格不能为空', trigger:'blur'}
         }
     }
   },

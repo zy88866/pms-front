@@ -37,7 +37,7 @@ export default {
       centerForm:{
         id:'',
         repairsBillNo:'',
-        RepairsPrice:''
+        repairsPrice:''
       }
     }
   },
