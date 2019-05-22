@@ -56,8 +56,8 @@ export default {
   data () {
     return {
       loginForm: {
-        username: 'wangwu',
-        password: '123123',
+        username: 'admin',
+        password: 'admin',
         rememberMe: ''
       },
       loginRules: {

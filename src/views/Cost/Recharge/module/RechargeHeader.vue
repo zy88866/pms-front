@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-       <el-card class="head-container">
+    <el-card class="head-container">
         <el-form ref="search" :model="searchFrom" label-width="80px" class="search" @submit.native.prevent>
           <el-row>
               <el-col :span="8">
@@ -18,7 +18,6 @@
               <el-col :span="6" :offset="10">
                 <div class="serch-button">
                   <el-button size="medium"  type="primary" icon="el-icon-search" @click="searchData(searchFrom.id)">搜索</el-button>
-                  <el-button size="medium"  type="success" icon="el-icon-plus" @click="addDialog()" >添加</el-button>
                 </div>
               </el-col>
           </el-row>
@@ -30,11 +29,12 @@
 <script type="text/ecmascript-6">
 import {mapState,mapActions} from 'vuex'
 export default {
-    data() {
+  name:'RechargeHeader',
+  data() {
         return {
-          searchFrom:{
-              id:''
-          }
+            searchFrom:{
+                id:''
+            }
         }
     },
     mounted() { 
@@ -42,15 +42,14 @@ export default {
     },
     computed: {
         ...mapState({
-            userlist : state => state.park.userList,
-            pageSize : state => state.park.table.pageSize,
+            userlist : state => state.recharge.userList,
+            pageSize : state => state.recharge.table.pageSize,
         })
     },
     methods: {
         ...mapActions({
-            getUserList: 'park/getUserList',
-            addDialog: 'park/addDialog',
-            search: 'park/search',
+            getUserList: 'recharge/getUserList',
+            search: 'recharge/search',
         }),
         searchData(data){
           this.search({"userId":data,"page":0,"size":this.pageSize});

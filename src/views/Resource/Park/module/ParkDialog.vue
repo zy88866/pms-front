@@ -91,7 +91,7 @@ export default {
       },
       rules:{
         user:{
-          id:{required:true,message:'小区名称不能为空', trigger:'blur'}
+          id:{required:true,message:'用户不能为空', trigger:'blur'}
         },
         parkType:{required:true,message:'车位类型不能为空', trigger:'blur'},
         position:{required:true,message:'位置不能为空', trigger:'blur'},

@@ -8,6 +8,8 @@ import costSet from './modules/costSet'
 import house from './modules/house'
 import door from './modules/door'
 import park from './modules/park'
+import recharge from './modules/recharge'
+import payment from './modules/payment'
 
 Vue.use(Vuex);
 
@@ -20,6 +22,8 @@ export default new Vuex.Store({
         costSet: costSet,
         house: house,
         door: door,
-        park: park
+        park: park,
+        recharge: recharge,
+        payment: payment
     }
 })
