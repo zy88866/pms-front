@@ -50,7 +50,7 @@ export default {
           if (index === 0) {
             sums[index] = '合计';
             return;
-          }else if(column.property==="money"){
+          }else if(column.property==="repairsPrice"){
             const values = data.map(item => Number(item[column.property]));
             if (!values.every(value => isNaN(value))) {
                 sums[index] = values.reduce((prev, curr) => {
