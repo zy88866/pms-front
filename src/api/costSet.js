@@ -10,6 +10,12 @@ export function findCostAll(page,size){
         }
     })
 }
+export function findCostAllNoPage(){
+    return new request({
+        url: '/cost/costAll',
+        method: 'GET',
+    })
+}
 
 export function createCost(cost){
     return new request({

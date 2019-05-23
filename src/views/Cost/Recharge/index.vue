@@ -3,7 +3,8 @@
        <recharge-header/>
         <el-table :data="tableData" size="small" border class="table-container">
         <el-table-column  width="50px" type="index" align="center"  label="序号" show-overflow-tooltip>  </el-table-column>
-        <el-table-column  prop="username" label="业主" align="center"></el-table-column>
+        <el-table-column  prop="username" label="用户名" align="center"></el-table-column>
+        <el-table-column  prop="realName" label="业主" align="center"></el-table-column>
         <el-table-column  prop="balance" label="账户余额" align="center"/>
         <el-table-column label="操作" align="center"  width="150px">
           <template slot-scope="scope">

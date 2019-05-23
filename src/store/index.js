@@ -12,6 +12,7 @@ import recharge from './modules/recharge'
 import payment from './modules/payment'
 import repairs from './modules/repairs'
 import maintain from './modules/maintain'
+import settle from './modules/settle'
 
 Vue.use(Vuex);
 
@@ -28,6 +29,7 @@ export default new Vuex.Store({
         recharge: recharge,
         payment: payment,
         repairs: repairs,
-        maintain: maintain
+        maintain: maintain,
+        settle: settle
     }
 })

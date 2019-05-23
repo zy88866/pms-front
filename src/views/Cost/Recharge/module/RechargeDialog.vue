@@ -8,8 +8,8 @@
       <el-form label-width="90px" ref="accountFrom" :model="accountFrom" :rules="rules">
         <el-row>
 
-      <el-col>
-        <el-form-item label="账户:"  prop="user.id">
+       <el-col>
+          <el-form-item label="账户:"  prop="user.id">
           <el-select v-model="accountFrom.user.id" placeholder="请选择用户" disabled>
               <el-option
                   v-for="item in userList"

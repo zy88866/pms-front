@@ -1,6 +1,6 @@
 <template>
-  <div class="app-container">
-    <el-card class="head-container">
+ <div class="app-container">
+       <el-card class="head-container">
         <el-form ref="search" :model="searchFrom" label-width="80px" class="search" @submit.native.prevent>
           <el-row>
               <el-col :span="8">
@@ -29,32 +29,32 @@
 <script type="text/ecmascript-6">
 import {mapState,mapActions} from 'vuex'
 export default {
-  name:'RechargeHeader',
+  name:'CenterHeader',
   data() {
-        return {
-            searchFrom:{
-                id:''
-            }
-        }
-    },
-    mounted() { 
-        this.getUserList();
-    },
-    computed: {
-        ...mapState({
-            userlist : state => state.recharge.userList,
-            pageSize : state => state.recharge.table.pageSize,
-        })
-    },
-    methods: {
-        ...mapActions({
-            getUserList: 'recharge/getUserList',
-            search: 'recharge/search',
-        }),
-        searchData(data){
-          this.search({"userId":data,"page":0,"size":this.pageSize});
-        }
-    } 
+    return {
+      searchFrom:{
+        id:''
+      }
+    }
+  },
+  mounted() { 
+    this.getUserList();
+  },
+  computed: {
+      ...mapState({
+          userlist : state => state.settle.userList,
+          pageSize : state => state.settle.table.pageSize,
+      })
+  },
+  methods: {
+      ...mapActions({
+          getUserList: 'settle/getUserList',
+          search: 'settle/search',
+      }),
+      searchData(data){
+        this.search({"userId":data,"page":0,"size":this.pageSize});
+      }
+  } 
 }
 </script>
 
