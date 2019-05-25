@@ -27,10 +27,6 @@
           @keyup.enter.native="handleLogin">
         </el-input>
       </el-form-item>
-      <el-checkbox
-        v-model="loginForm.rememberMe"
-        style="margin:0px 0px 25px 0px;"
-      >记住密码</el-checkbox>
       <el-form-item style="width:100%;">
         <el-button
           :loading="loading"
@@ -58,7 +54,6 @@ export default {
       loginForm: {
         username: 'admin',
         password: 'superadmin',
-        rememberMe: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
@@ -92,7 +87,7 @@ export default {
           return false;
         }
       })
-    }
+    },
   },
   components: {}
 }
@@ -125,8 +120,15 @@ export default {
     }
   }
   .login-tip {
-        font-size: 13px;
-        text-align: center;
-        color: #bfbfbf;
+      font-size: 13px;
+      text-align: center;
+      color: #bfbfbf;
+  }
+  .forget{
+    float:right; 
+    margin:0 5px 10px 0px;
+    font-size: 14px;
+    color: cornflowerblue;
+    cursor: pointer;
   }
 </style>
