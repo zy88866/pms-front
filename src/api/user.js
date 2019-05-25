@@ -66,3 +66,10 @@ export function updatePassword(user){
     data: user,
   })
 }
+
+export function resetPassword(userId){
+  return request({
+    url: '/user/'+userId,
+    method: 'PUT',
+  })
+}

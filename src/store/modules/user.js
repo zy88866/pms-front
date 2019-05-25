@@ -1,4 +1,4 @@
-import {getUserList,deleteUser,search,editUser,createUser,getUser} from '@/api/user'
+import {getUserList,deleteUser,search,editUser,createUser,getUser,resetPassword} from '@/api/user'
 export default{
     namespaced: true,
     state: {
@@ -67,6 +67,9 @@ export default{
         },
         async createUser({},user){
             await createUser(user)
+        },
+        async resetPassword({},userId){
+            await resetPassword(userId);
         },
         async editUser({},user){
             await editUser(user);

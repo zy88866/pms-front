@@ -9,20 +9,22 @@
       <el-table-column  prop="phone" label="手机号" align="center"></el-table-column>
       <el-table-column  prop="email" label="邮箱" align="center"></el-table-column>
       <el-table-column  prop="role.name" label="角色" align="center"></el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" align="center" width="250px">
          <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row.id)">编辑</el-button>
           <el-popover
             :ref="scope.row.id"
             placement="top"
             width="180">
-            <p>确定删除本条数据吗？</p>
+            <p>确定该操作吗？</p>
             <div style="text-align: right; margin: 0">
               <el-button size="mini" type="text" @click="$refs[scope.row.id].doClose()">取消</el-button>
               <el-button :loading="delLoading" type="primary" size="mini" @click="subDelete(scope.row.id)">确定</el-button>
             </div>
-            <el-button slot="reference" type="danger" size="mini">删除</el-button>
+            <el-button v-if="scope.row.useStatus==='ENABLED'" slot="reference" type="danger" size="mini">停用</el-button>
+            <el-button v-else slot="reference" type="success" size="mini">启用</el-button>
           </el-popover>
+          <el-button size="mini" type="primary" @click="resetPasswordDailog(scope.row.id)">重置密码</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -70,6 +72,7 @@ export default {
     ...mapActions({
       'editDialog': 'user/editDialog',
       'deleteUser':'user/deleteUser',
+      'resetPassword': 'user/resetPassword',
       'findAll':'user/findAll',
       }),
     subDelete(id) {
@@ -78,7 +81,7 @@ export default {
         this.delLoading = false;
         this.$refs[id].doClose()
         this.$notify({
-          title: '删除成功',
+          title: '操作成功',
           type: 'success',
           duration: 1500,
         }) ;
@@ -92,6 +95,20 @@ export default {
      this.editDialog(id).then((data)=>{
           this.resetForm=data;
       });
+    },
+    resetPasswordDailog(id){
+          this.$confirm('确定重置该账户吗?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+          }).then(() => {
+            this.resetPassword(id).then(() =>{
+              this.$message({
+                type: 'success',
+                message: '重置成功!'
+              });
+            })
+          }).catch(() => {         
+        });
     },
     clearData(){
       Object.assign(this.$data, this.$options.data())

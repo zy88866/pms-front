@@ -9,7 +9,7 @@
         <el-table-column  prop="expireDate" label="到期时间" align="center"></el-table-column>
         <el-table-column label="车位状态" align="center"  width="150px">
           <template slot-scope="scope">
-            <el-button v-if="scope.row.userStatus==='DISABLED'" size="mini" :loading="updataLoading" type="success"  @click="updataStatus(scope.row)">启用</el-button>
+            <el-button v-if="scope.row.useStatus==='DISABLED'" size="mini" :loading="updataLoading" type="success"  @click="updataStatus(scope.row)">启用</el-button>
             <el-button v-else  size="mini" :loading="updataLoading"  type="danger" @click="updataStatus(scope.row)">停用</el-button>
          </template>
         </el-table-column>
@@ -81,7 +81,7 @@ export default {
       this.updataLoading=true;
        let sendDate={
           id:data.id,
-          userStatus:data.userStatus==='DISABLED'?'ENABLED':'DISABLED',
+          useStatus:data.useStatus==='DISABLED'?'ENABLED':'DISABLED',
         }
         this.updataStatusData(sendDate).then((res)=>{
            this.findAll({"page":this.currentPage-1,"size":this.pageSize});

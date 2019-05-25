@@ -18,7 +18,7 @@
                 <el-button size="mini" type="text" @click="$refs[scope.row.id].doClose()">取消</el-button>
                 <el-button type="primary" :loading="updateLoading" size="mini" @click="updataStatus(scope.row)">确定</el-button>
               </div> 
-                <el-button v-if="scope.row.userStatus==='DISABLED'"  slot="reference" size="mini" type="success">启用</el-button>
+                <el-button v-if="scope.row.useStatus==='DISABLED'"  slot="reference" size="mini" type="success">启用</el-button>
                 <el-button v-else  slot="reference" size="mini" type="danger">停用</el-button>
               </el-popover>
             </template>
@@ -82,7 +82,7 @@ export default {
     updataStatus(data){
         let sendDate={
           id:data.id,
-          userStatus:data.userStatus==='DISABLED'?'ENABLED':'DISABLED',
+          useStatus:data.useStatus==='DISABLED'?'ENABLED':'DISABLED',
         }
         this.updateLoading = true;
         this.updataStatusData(sendDate).then((res)=>{
