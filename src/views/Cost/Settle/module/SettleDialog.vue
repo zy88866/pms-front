@@ -16,7 +16,7 @@
 
          <el-col>
             <el-form-item label="费用类型:"  prop="costSetting.id">
-                <el-select v-model="settleForm.costSetting.id" placeholder="请选择费用类型" >
+                <el-select v-model="settleForm.costSetting.id" placeholder="请选择费用类型" @change="costSettingChange">
                 <el-option
                     v-for="item in costList"
                     :key="item.id"
@@ -28,8 +28,14 @@
         </el-col>  
 
         <el-col>
-            <el-form-item label="计价" prop="multiple">
-                <el-input-number v-model="settleForm.multiple"  placeholder="请输入标准单位的计价数" :min="0" :precision="2"/>
+            <el-form-item label="基数:" prop="multiple">
+                <el-input-number @change="multipleChange" v-model="settleForm.multiple"  placeholder="请输入基数" :min="0" :precision="2"/>
+            </el-form-item>
+        </el-col>
+
+        <el-col>
+            <el-form-item label="总费用:">
+                <el-input v-model="amt"></el-input>
             </el-form-item>
         </el-col>
       
@@ -51,6 +57,9 @@ import {mapState,mapActions} from 'vuex'
 export default {
   data() {
     return {
+        price:0,
+        multiple:0,
+        amt:0,
         rules:{
             user:{
                 id:{required:true,message:'用户不能为空', trigger:'blur'},
@@ -85,6 +94,9 @@ export default {
           create:  'settle/create',
       }),
       cancel(){
+            this.price=0;
+            this.multiple=0;
+            this.amt=0;
             this.closeDialog();
             this.$emit("clearData");
             this.$refs['settleForm'].resetFields();
@@ -103,7 +115,18 @@ export default {
                     })
                 }
         })
-      }
+      },
+     clearData(){
+      Object.assign(this.$data, this.$options.data());
+    },  
+    multipleChange(multiple){
+      this.multiple=multiple;
+      this.amt=this.price*this.multiple;
+    },
+    costSettingChange(data){
+      this.price=this.costList.filter(v =>{return v.id===data})[0].costPrice;
+      this.amt=this.price*this.multiple;
+    }
    },
    mounted () { 
        this.findCostAll();
