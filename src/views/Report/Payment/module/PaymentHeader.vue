@@ -36,24 +36,24 @@ export default {
         }    
     }
   },
-    mounted() { 
-        this.getUserList();
-    },
-    computed: {
-        ...mapState({
-            userlist : state => state.payment.userList,
-            pageSize : state => state.payment.table.pageSize,
-        })
-    },
-    methods: {
-        ...mapActions({
-            getUserList: 'payment/getUserList',
-            report: 'payment/report',
-        }),
-        searchData(data){
-          this.report(data);
-        },
-    } 
+  mounted() { 
+      this.getUserList();
+  },
+  computed: {
+      ...mapState({
+          userlist : state => state.payment.userList,
+          pageSize : state => state.payment.table.pageSize,
+      })
+  },
+  methods: {
+      ...mapActions({
+          getUserList: 'payment/getUserList',
+          report: 'payment/report',
+      }),
+      searchData(data){
+        this.report(data);
+      },
+  } 
 }
 </script>
 

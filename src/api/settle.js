@@ -7,3 +7,10 @@ export function create(settle){
         data:settle
     })
 }
+
+export function report(userId){
+    return new request({
+        url: '/settle/report?userId='+userId,
+        method: 'GET',
+    })
+}
