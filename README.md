@@ -1,6 +1,6 @@
 # Vue + ElementUI  物业管理系统
 
-> vue cli +elementUI+less 
+> vue cli + elementUI + Vuex
 
 ## 项目使用
 
