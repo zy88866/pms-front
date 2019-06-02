@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
        <payment-header/>
-        <el-table :data="tableData" size="small" border class="table-container" show-summary :summary-method="totalSummary">
+        <el-table :data="currData" size="small" border class="table-container" show-summary :summary-method="totalSummary">
         <el-table-column  width="50px" type="index" align="center"  label="序号" show-overflow-tooltip>  </el-table-column>
         <el-table-column  prop="username" label="用户名" align="center"/>
         <el-table-column  prop="realName" label="业主" align="center"/>
@@ -14,6 +14,9 @@
         <el-pagination
         background
         :total="total"
+        :page-size="pagesize"
+        :current-page="currentPage"
+        @current-change="pageChange"
         style="margin-top:8px; float:right"
         layout="prev,pager,next"/>
   </div>
@@ -34,13 +37,16 @@ export default {
    //计算属性 监听vuex中的数据
    computed: {
     ...mapState({
-        tableData: state => state.payment.table.data,
+        currData: state => state.payment.table.currData,
         total: state => state.payment.table.total,
+        pagesize: state => state.payment.table.size,
+        currentPage: state => state.payment.table.currpage,
     })
   },
     methods:{
     ...mapActions({
         report: 'payment/report',
+        pageable:'payment/pageable'
     }),
     rechargeType(row, column){
         switch(row.rechargeType){
@@ -75,6 +81,9 @@ export default {
           }
         });
         return sums;
+    },
+    pageChange(val){
+      this.pageable(val);
     }
   },
   mounted () { //页面初始化完成
