@@ -2,7 +2,7 @@
    <div>
      <el-card  class="head-container">
            <!-- 搜索 -->
-         <el-form ref="query" :model="query" label-width="80px">
+         <el-form ref="query" :model="query" label-width="80px" class="search">
             <el-row>
                <el-col :span="8">
                   <el-form-item label="姓名:" prop="realName">
@@ -84,9 +84,12 @@ export default {
 }
 </script>
 
-<style scoped>
-   .serch-button{
-      display: flex;
-      justify-content: flex-end;
-   }
+<style scoped lang="less">
+.head-container{
+    height: 140px;
+      .serch-button{
+        display: flex;
+        justify-content: flex-end;
+      }
+  }
 </style>
