@@ -1,6 +1,11 @@
-# Vue + ElementUI  物业管理系统
+# 物业管理系统
 
-> vue cli + elementUI + Vuex
+基于前后端分离开发</br>
+1. 前端地址：https://github.com/17664206081/pms-front
+2. 后端地址：https://github.com/17664206081/pms
+
+## 技术框架
+vue cli + elementUI + Vuex + vue-router
 
 ## 项目使用
 
@@ -41,3 +46,9 @@ server {
 2. 拷贝 iconfont.woff iconfont.ttf iconfont.svg icon.eot 文件到 src/assets/icon 目录下
 3. 将iconfont.css 中 头替换 添加对应的icon 
 4. 在页面中使用 ``` <i class="pms-icon-**"/> ```
+
+
+### 项目截图
+
+
+
