@@ -18,6 +18,7 @@
               <el-col :span="6" :offset="10">
                 <div class="serch-button">
                   <el-button size="medium"  type="primary" icon="el-icon-search" @click="searchData(searchFrom.id)">搜索</el-button>
+                  <el-button size="medium"  type="success" icon="pms-icon-daochu"> 导出</el-button>
                 </div>
               </el-col>
           </el-row>
