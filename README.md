@@ -47,6 +47,12 @@ server {
 3. 将iconfont.css 中 头替换 添加对应的icon 
 4. 在页面中使用 ``` <i class="pms-icon-**"/> ```
 
+## 代码贡献
+1. Fork
+2. git checkout -b 'new-branch'
+3. git commit -m '提交改动的内容'
+4. git push origin/new-branch
+5. 在githup下的该分支下发起 Pull Request
 
 ### 项目截图
 
